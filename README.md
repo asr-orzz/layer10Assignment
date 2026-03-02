@@ -52,10 +52,6 @@ Generated artifacts land in `data/raw/` (corpus), `outputs/memory.db` (SQLite gr
 - All outputs are file-based; reruns are safe (DB cleared then repopulated). No paid API dependencies.
 
 ## Example outputs
-- `outputs/sample_context_packs.json` – two example questions with grounded snippets.
-- `outputs/graph.html` – interactive graph; filters can be added by editing `src/viz.py`.
+- `outputs/sample_context_packs.json` â€“ two example questions with grounded snippets.
+- `outputs/graph.html` â€“ interactive graph; filters can be added by editing `src/viz.py`.
 
-## Next improvements (if more time)
-- Add schema versioning + migrations; richer claim typing (decisions/state transitions).
-- Hybrid retrieval (BM25 + embeddings) and diversification.
-- UI affordances for duplicate/merge inspection and evidence drill-down.
