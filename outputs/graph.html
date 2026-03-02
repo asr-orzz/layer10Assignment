@@ -1,0 +1,250 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 720px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 100%;
+                 height: 720px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#2196f3", "id": "issue-7235", "label": "#7235: Feature Request: SkillBoss AI Gateway Integration", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-xiaoyinqu", "label": "xiaoyinqu", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-6b3a8ce614b0", "label": "open", "shape": "box", "size": 10}, {"color": "#cfd8dc", "id": "lit-46b6564109c6", "label": "Feature Request: SkillBoss AI Gateway Integration", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-api", "label": "API", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-claude-3-7-sonnet", "label": "Claude 3.7 Sonnet", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-mistral-large", "label": "Mistral Large", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-data-scraping-intelligence", "label": "Data Scraping \u0026 Intelligence", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-domain-management---", "label": "Domain Management\n- *", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-cursor-windsurf-cline-add", "label": "Cursor / Windsurf / Cline\n\nAdd", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-platform-install-command", "label": "Platform | Install Command", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-api-catalog-https-skillboss-co-docs", "label": "API Catalog](https://skillboss.co/docs", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-npm-package-https-www-npmjs-com-package-skillboss-mcp-server", "label": "NPM Package](https://www.npmjs.com/package/@skillboss/mcp-server", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7234", "label": "#7234: Quoted charset values are not detected by `get_encoding_from", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-jmdotdev", "label": "jmdotdev", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-117f887a9ad1", "label": "Quoted charset values are not detected by `get_encoding_from_headers`", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-content-type", "label": "Content-Type", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7231", "label": "#7231: MockResponse.getheaders() has two bugs: missing return and n", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-tboy1337", "label": "tboy1337", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-836ff119551d", "label": "MockResponse.getheaders() has two bugs: missing return and nonexistent method call", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-getheaders-self", "label": "getheaders(self", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-attributeerror", "label": "AttributeError", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-extract_cookies_to_jar", "label": "extract_cookies_to_jar", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-mockresponse", "label": "MockResponse", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7228", "label": "#7228: RequestsCookieJar shouldn\u0027t inherit from MutableMapping", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-shelvacu", "label": "shelvacu", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-a1c001e704e6", "label": "RequestsCookieJar shouldn\u0027t inherit from MutableMapping", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-cookiejar", "label": "CookieJar", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-collections-abc", "label": "collections.abc", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7223", "label": "#7223: Chardet is used, when it is available, not when `[use-charde", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#cfd8dc", "id": "lit-ded3ffb619ee", "label": "Chardet is used, when it is available, not when `[use-chardet-on-py3]`-extra is installed", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-chardet-__version", "label": "chardet.__version", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#4caf50", "id": "person-sigmavirus24", "label": "sigmavirus24", "shape": "dot", "size": 10, "title": "person"}, {"color": "#4caf50", "id": "person-mahek2016", "label": "mahek2016", "shape": "dot", "size": 10, "title": "person"}, {"color": "#2196f3", "id": "issue-7222", "label": "#7222: Dependency warning", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#cfd8dc", "id": "lit-74627c4ddb4c", "label": "closed", "shape": "box", "size": 10}, {"color": "#cfd8dc", "id": "lit-960736f925f3", "label": "Dependency warning", "shape": "box", "size": 10}, {"color": "#4caf50", "id": "person-roger-zhangg", "label": "roger-zhangg", "shape": "dot", "size": 10, "title": "person"}, {"color": "#4caf50", "id": "person-houbein", "label": "Houbein", "shape": "dot", "size": 10, "title": "person"}, {"color": "#2196f3", "id": "issue-7219", "label": "#7219: chardet 6 triggers RequestsDependencyWarning on stderr", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-thomaswaldmann", "label": "ThomasWaldmann", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-f57cf96754c4", "label": "chardet 6 triggers RequestsDependencyWarning on stderr", "shape": "box", "size": 10}, {"color": "#4caf50", "id": "person-aminvakil", "label": "aminvakil", "shape": "dot", "size": 10, "title": "person"}, {"color": "#2196f3", "id": "issue-7209", "label": "#7209: TooManyRedirects exception loop when requesting FQDN URLs wi", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-yatesmold", "label": "YatesMold", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-6197b4a59922", "label": "TooManyRedirects exception loop when requesting FQDN URLs with a trailing dot", "shape": "box", "size": 10}, {"color": "#ff9800", "id": "component-propose-close", "label": "Propose Close", "shape": "dot", "size": 10, "title": "component"}, {"color": "#9c27b0", "id": "concept-chrome-firefox", "label": "Chrome/Firefox", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-the-fedora-infrastructure", "label": "the Fedora Infrastructure", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#4caf50", "id": "person-201841301322", "label": "201841301322", "shape": "dot", "size": 10, "title": "person"}, {"color": "#4caf50", "id": "person-nateprewitt", "label": "nateprewitt", "shape": "dot", "size": 10, "title": "person"}, {"color": "#9c27b0", "id": "concept-https-github-com-urllib3-urllib3-issues-2873", "label": "https://github.com/urllib3/urllib3/issues/2873", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7198", "label": "#7198: `chardet` is preferred over explicit dependency `charset_nor", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-j0057", "label": "j0057", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-7a77ffe35e43", "label": "`chardet` is preferred over explicit dependency `charset_normalizer`", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-the-apache-software-foundation", "label": "the Apache Software Foundation", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7188", "label": "#7188: DMTF Redfish fails with 2.32 request module", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-piyushtyagi379", "label": "piyushtyagi379", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-8183a04ddc2c", "label": "DMTF Redfish fails with 2.32 request module", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-dmtf", "label": "DMTF", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#4caf50", "id": "person-tom-1508", "label": "Tom-1508", "shape": "dot", "size": 10, "title": "person"}, {"color": "#2196f3", "id": "issue-7182", "label": "#7182: MCP-test", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-yashikavihan-3006", "label": "YashikaVihan-3006", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-8061eecc7798", "label": "MCP-test", "shape": "box", "size": 10}, {"color": "#2196f3", "id": "issue-7177", "label": "#7177: AttributeError when passing None to utility functions (get_e", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-davchaudhari", "label": "davchaudhari", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-13c33c70783c", "label": "AttributeError when passing None to utility functions (get_encoding_from_headers, parse_header_links)", "shape": "box", "size": 10}, {"color": "#4caf50", "id": "person-davidism", "label": "davidism", "shape": "dot", "size": 10, "title": "person"}, {"color": "#2196f3", "id": "issue-7172", "label": "#7172: [TEST SUB-TASK 2] Add async documentation", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-maxine-yx", "label": "maxine-yx", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-d0fef92da3a5", "label": "[TEST SUB-TASK 2] Add async documentation", "shape": "box", "size": 10}, {"color": "#2196f3", "id": "issue-7171", "label": "#7171: [TEST SUB-TASK 1] Implement basic async support", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#cfd8dc", "id": "lit-687f6958e5c7", "label": "[TEST SUB-TASK 1] Implement basic async support", "shape": "box", "size": 10}, {"color": "#2196f3", "id": "issue-7170", "label": "#7170: [TEST] Exploring issue management workflow", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#cfd8dc", "id": "lit-60495ab8d5eb", "label": "[TEST] Exploring issue management workflow", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-github", "label": "GitHub", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7169", "label": "#7169: `timeout` is not a true end-to-end timeout (causes confusion", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-manohar02", "label": "manohar02", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-c5bea771bf87", "label": "`timeout` is not a true end-to-end timeout (causes confusion + bugs)", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-cpython", "label": "CPython", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-read-27", "label": "read=27", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7167", "label": "#7167: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-lakshmimandal", "label": "LakshmiMandal", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-098ce32a9140", "label": "Crash bug", "shape": "box", "size": 10}, {"color": "#2196f3", "id": "issue-7156", "label": "#7156: Decode bytes for HTTP method names instead of builtin_str in", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-surenraju", "label": "surenraju", "shape": "dot", "size": 10, "title": "person"}, {"color": "#cfd8dc", "id": "lit-c7284e0a6195", "label": "Decode bytes for HTTP method names instead of builtin_str in requests/models.py", "shape": "box", "size": 10}, {"color": "#2196f3", "id": "issue-7155", "label": "#7155: Decode bytes for HTTP method names in requests/models.py ins", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#cfd8dc", "id": "lit-a79343e680c7", "label": "Decode bytes for HTTP method names in requests/models.py instead of using builtin_str", "shape": "box", "size": 10}, {"color": "#2196f3", "id": "issue-7154", "label": "#7154: Decode bytes to string for HTTP method names in requests/mod", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#cfd8dc", "id": "lit-2793e388e6b7", "label": "Decode bytes to string for HTTP method names in requests/models.py", "shape": "box", "size": 10}, {"color": "#9c27b0", "id": "concept-provider", "label": "Provider", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-deepseek-r1", "label": "DeepSeek R1", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-rerank", "label": "Rerank", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-google", "label": "Google", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-tts", "label": "TTS", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept--0-30-1k", "label": "~$0.30/1K", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept--15-1m", "label": "~$15/1M", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-api---templates", "label": "API\n- Templates", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-crud", "label": "CRUD", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-dns", "label": "DNS", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-cname", "label": "CNAME", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-mx", "label": "MX", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-og", "label": "OG", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-openai-sdk", "label": "OpenAI SDK", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-cursor", "label": "Cursor", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-windsurf", "label": "Windsurf", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-trae", "label": "Trae", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-mcp", "label": "MCP", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-openai", "label": "OpenAI", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-typescript", "label": "TypeScript", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-keyerror", "label": "KeyError", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-requestscookiejar", "label": "RequestsCookieJar", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#4caf50", "id": "person-sedrubal", "label": "sedrubal", "shape": "dot", "size": 10, "title": "person"}, {"color": "#9c27b0", "id": "concept-imho", "label": "IMHO", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-ci", "label": "CI", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-host", "label": "Host", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-typeerror", "label": "TypeError", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-nonetype", "label": "NoneType", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-ssl", "label": "SSL", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#2196f3", "id": "issue-7166", "label": "#7166: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7165", "label": "#7165: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7164", "label": "#7164: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7163", "label": "#7163: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7162", "label": "#7162: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7161", "label": "#7161: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7160", "label": "#7160: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7159", "label": "#7159: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7158", "label": "#7158: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#2196f3", "id": "issue-7157", "label": "#7157: Crash bug", "shape": "dot", "size": 10, "title": "issue"}, {"color": "#4caf50", "id": "person-maitrey", "label": "maitrey", "shape": "dot", "size": 10, "title": "person"}, {"color": "#4caf50", "id": "person-vivodi", "label": "vivodi", "shape": "dot", "size": 10, "title": "person"}, {"color": "#9c27b0", "id": "concept-tls", "label": "TLS", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-sni", "label": "SNI", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-ipv6", "label": "IPv6", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-llm", "label": "LLM", "shape": "dot", "size": 10, "title": "concept"}, {"color": "#9c27b0", "id": "concept-click", "label": "Click", "shape": "dot", "size": 10, "title": "concept"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "from": "issue-7235", "label": "created_by", "to": "person-xiaoyinqu", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "status", "to": "lit-6b3a8ce614b0", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "summary", "to": "lit-46b6564109c6", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-api", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-claude-3-7-sonnet", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-mistral-large", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-data-scraping-intelligence", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-domain-management---", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-cursor-windsurf-cline-add", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-platform-install-command", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-api-catalog-https-skillboss-co-docs", "width": 1}, {"arrows": "to", "from": "issue-7235", "label": "mentions", "to": "concept-npm-package-https-www-npmjs-com-package-skillboss-mcp-server", "width": 1}, {"arrows": "to", "from": "issue-7234", "label": "created_by", "to": "person-jmdotdev", "width": 1}, {"arrows": "to", "from": "issue-7234", "label": "summary", "to": "lit-117f887a9ad1", "width": 1}, {"arrows": "to", "from": "issue-7234", "label": "mentions", "to": "concept-content-type", "width": 1}, {"arrows": "to", "from": "issue-7231", "label": "created_by", "to": "person-tboy1337", "width": 1}, {"arrows": "to", "from": "issue-7231", "label": "summary", "to": "lit-836ff119551d", "width": 1}, {"arrows": "to", "from": "issue-7231", "label": "mentions", "to": "concept-getheaders-self", "width": 1}, {"arrows": "to", "from": "issue-7231", "label": "mentions", "to": "concept-attributeerror", "width": 1}, {"arrows": "to", "from": "issue-7231", "label": "mentions", "to": "concept-extract_cookies_to_jar", "width": 1}, {"arrows": "to", "from": "issue-7231", "label": "mentions", "to": "concept-mockresponse", "width": 1}, {"arrows": "to", "from": "issue-7228", "label": "created_by", "to": "person-shelvacu", "width": 1}, {"arrows": "to", "from": "issue-7228", "label": "summary", "to": "lit-a1c001e704e6", "width": 1}, {"arrows": "to", "from": "issue-7228", "label": "mentions", "to": "concept-cookiejar", "width": 1}, {"arrows": "to", "from": "issue-7228", "label": "mentions", "to": "concept-collections-abc", "width": 1}, {"arrows": "to", "from": "issue-7223", "label": "summary", "to": "lit-ded3ffb619ee", "width": 1}, {"arrows": "to", "from": "issue-7223", "label": "mentions", "to": "concept-chardet-__version", "width": 1}, {"arrows": "to", "from": "issue-7223", "label": "comment_by", "to": "person-sigmavirus24", "width": 1}, {"arrows": "to", "from": "issue-7223", "label": "comment_by", "to": "person-mahek2016", "width": 1}, {"arrows": "to", "from": "issue-7222", "label": "status", "to": "lit-74627c4ddb4c", "width": 1}, {"arrows": "to", "from": "issue-7222", "label": "summary", "to": "lit-960736f925f3", "width": 1}, {"arrows": "to", "from": "issue-7222", "label": "comment_by", "to": "person-roger-zhangg", "width": 1}, {"arrows": "to", "from": "issue-7222", "label": "comment_by", "to": "person-houbein", "width": 1}, {"arrows": "to", "from": "issue-7219", "label": "created_by", "to": "person-thomaswaldmann", "width": 1}, {"arrows": "to", "from": "issue-7219", "label": "summary", "to": "lit-f57cf96754c4", "width": 1}, {"arrows": "to", "from": "issue-7219", "label": "comment_by", "to": "person-aminvakil", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "created_by", "to": "person-yatesmold", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "summary", "to": "lit-6197b4a59922", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "has_label", "to": "component-propose-close", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "mentions", "to": "concept-chrome-firefox", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "mentions", "to": "concept-the-fedora-infrastructure", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "comment_by", "to": "person-201841301322", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "comment_by", "to": "person-nateprewitt", "width": 1}, {"arrows": "to", "from": "issue-7209", "label": "mentions", "to": "concept-https-github-com-urllib3-urllib3-issues-2873", "width": 1}, {"arrows": "to", "from": "issue-7198", "label": "created_by", "to": "person-j0057", "width": 1}, {"arrows": "to", "from": "issue-7198", "label": "summary", "to": "lit-7a77ffe35e43", "width": 1}, {"arrows": "to", "from": "issue-7198", "label": "mentions", "to": "concept-the-apache-software-foundation", "width": 1}, {"arrows": "to", "from": "issue-7188", "label": "created_by", "to": "person-piyushtyagi379", "width": 1}, {"arrows": "to", "from": "issue-7188", "label": "summary", "to": "lit-8183a04ddc2c", "width": 1}, {"arrows": "to", "from": "issue-7188", "label": "mentions", "to": "concept-dmtf", "width": 1}, {"arrows": "to", "from": "issue-7188", "label": "comment_by", "to": "person-tom-1508", "width": 1}, {"arrows": "to", "from": "issue-7182", "label": "created_by", "to": "person-yashikavihan-3006", "width": 1}, {"arrows": "to", "from": "issue-7182", "label": "summary", "to": "lit-8061eecc7798", "width": 1}, {"arrows": "to", "from": "issue-7177", "label": "created_by", "to": "person-davchaudhari", "width": 1}, {"arrows": "to", "from": "issue-7177", "label": "summary", "to": "lit-13c33c70783c", "width": 1}, {"arrows": "to", "from": "issue-7177", "label": "comment_by", "to": "person-davidism", "width": 1}, {"arrows": "to", "from": "issue-7172", "label": "created_by", "to": "person-maxine-yx", "width": 1}, {"arrows": "to", "from": "issue-7172", "label": "summary", "to": "lit-d0fef92da3a5", "width": 1}, {"arrows": "to", "from": "issue-7171", "label": "summary", "to": "lit-687f6958e5c7", "width": 1}, {"arrows": "to", "from": "issue-7170", "label": "summary", "to": "lit-60495ab8d5eb", "width": 1}, {"arrows": "to", "from": "issue-7170", "label": "mentions", "to": "concept-github", "width": 1}, {"arrows": "to", "from": "issue-7169", "label": "created_by", "to": "person-manohar02", "width": 1}, {"arrows": "to", "from": "issue-7169", "label": "summary", "to": "lit-c5bea771bf87", "width": 1}, {"arrows": "to", "from": "issue-7169", "label": "mentions", "to": "concept-cpython", "width": 1}, {"arrows": "to", "from": "issue-7169", "label": "mentions", "to": "concept-read-27", "width": 1}, {"arrows": "to", "from": "issue-7167", "label": "created_by", "to": "person-lakshmimandal", "width": 1}, {"arrows": "to", "from": "issue-7167", "label": "summary", "to": "lit-098ce32a9140", "width": 1}, {"arrows": "to", "from": "issue-7156", "label": "created_by", "to": "person-surenraju", "width": 1}, {"arrows": "to", "from": "issue-7156", "label": "summary", "to": "lit-c7284e0a6195", "width": 1}, {"arrows": "to", "from": "issue-7155", "label": "summary", "to": "lit-a79343e680c7", "width": 1}, {"arrows": "to", "from": "issue-7154", "label": "summary", "to": "lit-2793e388e6b7", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

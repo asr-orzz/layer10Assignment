@@ -1,0 +1,312 @@
+{
+  "Who created the latest issues about redirects?": [
+    {
+      "claim_id": "81a46133df33",
+      "score": 6.876,
+      "subject": "#7222: Dependency warning",
+      "predicate": "comment_by",
+      "object": "person-houbein",
+      "evidence": [
+        {
+          "id": "ev-comment-3946942889",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3946942889",
+          "snippet": "@sigmavirus24  Your reply really bugs me.  #1 I do not search for closed issues for a problem that is still happening on the latest version.  #2 You should not have closed the issue you linked, because you have not solved it.  #3 If a specific version of chardet is important to y",
+          "timestamp": "2026-02-23T19:47:24Z"
+        }
+      ]
+    },
+    {
+      "claim_id": "2db647698d34",
+      "score": 6.669,
+      "subject": "#7172: [TEST SUB-TASK 2] Add async documentation",
+      "predicate": "created_by",
+      "object": "person-maxine-yx",
+      "evidence": [
+        {
+          "id": "ev-issue-7172",
+          "url": "https://github.com/psf/requests/issues/7172",
+          "snippet": "Sub-task 2: Document async usage patterns",
+          "timestamp": "2026-01-15T18:08:49Z"
+        },
+        {
+          "id": "ev-issue-7171",
+          "url": "https://github.com/psf/requests/issues/7171",
+          "snippet": "Sub-task 1: Implement basic async/await patterns",
+          "timestamp": "2026-01-15T18:08:49Z"
+        },
+        {
+          "id": "ev-issue-7170",
+          "url": "https://github.com/psf/requests/issues/7170",
+          "snippet": "This is a test issue created to explore GitHub issue management tools and workflows. This will be closed immediately.",
+          "timestamp": "2026-01-15T18:08:37Z"
+        },
+        {
+          "id": "ev-comment-3756201551",
+          "url": "https://github.com/psf/requests/issues/7170#issuecomment-3756201551",
+          "snippet": "Adding more details about the testing workflow:  1. Testing issue creation ✓ 2. Testing issue comments ✓ 3. Next: Testing sub-issue management 4. Next: Testing PR workflow  This is part of a systematic tool exploration.",
+          "timestamp": "2026-01-15T18:08:43Z"
+        }
+      ]
+    },
+    {
+      "claim_id": "6eda598ef48c",
+      "score": 5.974,
+      "subject": "#7222: Dependency warning",
+      "predicate": "comment_by",
+      "object": "person-roger-zhangg",
+      "evidence": [
+        {
+          "id": "ev-comment-3946514807",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3946514807",
+          "snippet": "Same issue, I need to pin `chardet<6` to keep using request for now",
+          "timestamp": "2026-02-23T18:24:51Z"
+        },
+        {
+          "id": "ev-comment-3951575394",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3951575394",
+          "snippet": "@Houbein please do some more research before you post a rant comment like this  1. You *really should* search closed issues for a problem that still exists in the latest version. 2. This issue was closed, because it is a duplicate of #7219  3. Please read here, why it was added a",
+          "timestamp": "2026-02-24T12:52:31Z"
+        }
+      ]
+    },
+    {
+      "claim_id": "991915d7991a",
+      "score": 4.542,
+      "subject": "#7223: Chardet is used, when it is available, not when `[use-charde",
+      "predicate": "comment_by",
+      "object": "person-sigmavirus24",
+      "evidence": [
+        {
+          "id": "ev-comment-3951799831",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3951799831",
+          "snippet": "There is no way to know what extra was installed, last I had checked so the only way to know what to use is whether it is importable or not.",
+          "timestamp": "2026-02-24T13:23:50Z"
+        },
+        {
+          "id": "ev-comment-3952757774",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3952757774",
+          "snippet": "It has nothing to do with package managers... What about the message is unclear today or implied it's the fault if the package manager?",
+          "timestamp": "2026-02-24T15:09:35Z"
+        },
+        {
+          "id": "ev-comment-3955090009",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3955090009",
+          "snippet": "Package managers (all of them I've used in python) do not protect you from doing an install today, and an upgrade later that violates a constraint of something already installed. To do that would be slow, even for uv. This is why pipx came into being and many other tools.  This i",
+          "timestamp": "2026-02-24T22:26:30Z"
+        },
+        {
+          "id": "ev-comment-3959155208",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3959155208",
+          "snippet": "To be clear, we already raised the cap. We need to perform a release but that will eliminate this warning.",
+          "timestamp": "2026-02-25T13:09:06Z"
+        },
+        {
+          "id": "ev-comment-3959502993",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3959502993",
+          "snippet": "We don't work on this full time, and all work is best effort. So a reasonable estimate is somewhere between in the next month to the next 5 years. I can't be more specific than that",
+          "timestamp": "2026-02-25T14:09:41Z"
+        },
+        {
+          "id": "ev-comment-3953856112",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3953856112",
+          "snippet": "My problem is, that requests complains about unsupported versions of dependencies and my first thought was, why did my package manager fail to resolve them correctly.",
+          "timestamp": "2026-02-24T18:12:34Z"
+        },
+        {
+          "id": "ev-comment-3957101142",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3957101142",
+          "snippet": "The checking and warning itself is not the problem. I think, the problem is, that noone did any mistake:  - the package manager did resolve all dependencies correctly. They follow all  PEPs how to install packages. - I, as developer, specified the dependencies correctly and I did",
+          "timestamp": "2026-02-25T06:18:57Z"
+        },
+        {
+          "id": "ev-comment-3959382107",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3959382107",
+          "snippet": "Dear Maintainers,   We use conan and are also affected since chardet got released : https://github.com/conan-io/conan/blob/develop2/conans/requirements.txt#L1. We are aware of the complexities of open source development, but from our perspective having an estimate of when a fix m",
+          "timestamp": "2026-02-25T13:49:49Z"
+        },
+        {
+          "id": "ev-comment-3946555958",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3946555958",
+          "snippet": "In the future, please search **closed and** open issues before creating new ones that are duplicates.",
+          "timestamp": "2026-02-23T18:31:31Z"
+        },
+        {
+          "id": "ev-comment-3940970084",
+          "url": "https://github.com/psf/requests/issues/7219#issuecomment-3940970084",
+          "snippet": "It doesn't _break_ requests. We raise a warning because we haven't specifically tested it such that we raised the cap.  It _fails_ your testsuite because the warning is configured by your test suite to error on warnings - which I agree with.  Requests would not necessarily break ",
+          "timestamp": "2026-02-22T13:40:49Z"
+        },
+        {
+          "id": "ev-comment-3873458055",
+          "url": "https://github.com/psf/requests/issues/7198#issuecomment-3873458055",
+          "snippet": "This is the intended behavior to preserve backwards compatibility when the Apache Software Foundation fundamentally misunderstood its own licensing requirements and threatened us unless we added the dependency on charset normalizer which has been nothing but a headache.   We're n",
+          "timestamp": "2026-02-09T19:29:58Z"
+        },
+        {
+          "id": "ev-comment-3775608743",
+          "url": "https://github.com/psf/requests/issues/7177#issuecomment-3775608743",
+          "snippet": "Thank you @davidism   For future reference, as has been stated previously, \"utility\" functions are not for end users and are not documented for them, so this bug was invalid regardless.",
+          "timestamp": "2026-01-21T00:45:23Z"
+        },
+        {
+          "id": "ev-comment-3757429250",
+          "url": "https://github.com/psf/requests/issues/7170#issuecomment-3757429250",
+          "snippet": "Test on your own repositories please, not on large popular open source ones",
+          "timestamp": "2026-01-15T23:59:22Z"
+        },
+        {
+          "id": "ev-comment-3755412351",
+          "url": "https://github.com/psf/requests/issues/7169#issuecomment-3755412351",
+          "snippet": "In the future, please search **closed and** open issues before creating new ones that are duplicates.",
+          "timestamp": "2026-01-15T15:27:41Z"
+        }
+      ]
+    }
+  ],
+  "Which issues mention proxies or certificates?": [
+    {
+      "claim_id": "f2116df5831e",
+      "score": 3.964,
+      "subject": "#7198: `chardet` is preferred over explicit dependency `charset_nor",
+      "predicate": "mentions",
+      "object": "concept-the-apache-software-foundation",
+      "evidence": [
+        {
+          "id": "ev-comment-3873458055",
+          "url": "https://github.com/psf/requests/issues/7198#issuecomment-3873458055",
+          "snippet": "This is the intended behavior to preserve backwards compatibility when the Apache Software Foundation fundamentally misunderstood its own licensing requirements and threatened us unless we added the dependency on charset normalizer which has been nothing but a headache.   We're n",
+          "timestamp": "2026-02-09T19:29:58Z"
+        }
+      ]
+    },
+    {
+      "claim_id": "991915d7991a",
+      "score": 3.89,
+      "subject": "#7223: Chardet is used, when it is available, not when `[use-charde",
+      "predicate": "comment_by",
+      "object": "person-sigmavirus24",
+      "evidence": [
+        {
+          "id": "ev-comment-3951799831",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3951799831",
+          "snippet": "There is no way to know what extra was installed, last I had checked so the only way to know what to use is whether it is importable or not.",
+          "timestamp": "2026-02-24T13:23:50Z"
+        },
+        {
+          "id": "ev-comment-3952757774",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3952757774",
+          "snippet": "It has nothing to do with package managers... What about the message is unclear today or implied it's the fault if the package manager?",
+          "timestamp": "2026-02-24T15:09:35Z"
+        },
+        {
+          "id": "ev-comment-3955090009",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3955090009",
+          "snippet": "Package managers (all of them I've used in python) do not protect you from doing an install today, and an upgrade later that violates a constraint of something already installed. To do that would be slow, even for uv. This is why pipx came into being and many other tools.  This i",
+          "timestamp": "2026-02-24T22:26:30Z"
+        },
+        {
+          "id": "ev-comment-3959155208",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3959155208",
+          "snippet": "To be clear, we already raised the cap. We need to perform a release but that will eliminate this warning.",
+          "timestamp": "2026-02-25T13:09:06Z"
+        },
+        {
+          "id": "ev-comment-3959502993",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3959502993",
+          "snippet": "We don't work on this full time, and all work is best effort. So a reasonable estimate is somewhere between in the next month to the next 5 years. I can't be more specific than that",
+          "timestamp": "2026-02-25T14:09:41Z"
+        },
+        {
+          "id": "ev-comment-3953856112",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3953856112",
+          "snippet": "My problem is, that requests complains about unsupported versions of dependencies and my first thought was, why did my package manager fail to resolve them correctly.",
+          "timestamp": "2026-02-24T18:12:34Z"
+        },
+        {
+          "id": "ev-comment-3957101142",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3957101142",
+          "snippet": "The checking and warning itself is not the problem. I think, the problem is, that noone did any mistake:  - the package manager did resolve all dependencies correctly. They follow all  PEPs how to install packages. - I, as developer, specified the dependencies correctly and I did",
+          "timestamp": "2026-02-25T06:18:57Z"
+        },
+        {
+          "id": "ev-comment-3959382107",
+          "url": "https://github.com/psf/requests/issues/7223#issuecomment-3959382107",
+          "snippet": "Dear Maintainers,   We use conan and are also affected since chardet got released : https://github.com/conan-io/conan/blob/develop2/conans/requirements.txt#L1. We are aware of the complexities of open source development, but from our perspective having an estimate of when a fix m",
+          "timestamp": "2026-02-25T13:49:49Z"
+        },
+        {
+          "id": "ev-comment-3946555958",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3946555958",
+          "snippet": "In the future, please search **closed and** open issues before creating new ones that are duplicates.",
+          "timestamp": "2026-02-23T18:31:31Z"
+        },
+        {
+          "id": "ev-comment-3940970084",
+          "url": "https://github.com/psf/requests/issues/7219#issuecomment-3940970084",
+          "snippet": "It doesn't _break_ requests. We raise a warning because we haven't specifically tested it such that we raised the cap.  It _fails_ your testsuite because the warning is configured by your test suite to error on warnings - which I agree with.  Requests would not necessarily break ",
+          "timestamp": "2026-02-22T13:40:49Z"
+        },
+        {
+          "id": "ev-comment-3873458055",
+          "url": "https://github.com/psf/requests/issues/7198#issuecomment-3873458055",
+          "snippet": "This is the intended behavior to preserve backwards compatibility when the Apache Software Foundation fundamentally misunderstood its own licensing requirements and threatened us unless we added the dependency on charset normalizer which has been nothing but a headache.   We're n",
+          "timestamp": "2026-02-09T19:29:58Z"
+        },
+        {
+          "id": "ev-comment-3775608743",
+          "url": "https://github.com/psf/requests/issues/7177#issuecomment-3775608743",
+          "snippet": "Thank you @davidism   For future reference, as has been stated previously, \"utility\" functions are not for end users and are not documented for them, so this bug was invalid regardless.",
+          "timestamp": "2026-01-21T00:45:23Z"
+        },
+        {
+          "id": "ev-comment-3757429250",
+          "url": "https://github.com/psf/requests/issues/7170#issuecomment-3757429250",
+          "snippet": "Test on your own repositories please, not on large popular open source ones",
+          "timestamp": "2026-01-15T23:59:22Z"
+        },
+        {
+          "id": "ev-comment-3755412351",
+          "url": "https://github.com/psf/requests/issues/7169#issuecomment-3755412351",
+          "snippet": "In the future, please search **closed and** open issues before creating new ones that are duplicates.",
+          "timestamp": "2026-01-15T15:27:41Z"
+        }
+      ]
+    },
+    {
+      "claim_id": "81a46133df33",
+      "score": 3.229,
+      "subject": "#7222: Dependency warning",
+      "predicate": "comment_by",
+      "object": "person-houbein",
+      "evidence": [
+        {
+          "id": "ev-comment-3946942889",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3946942889",
+          "snippet": "@sigmavirus24  Your reply really bugs me.  #1 I do not search for closed issues for a problem that is still happening on the latest version.  #2 You should not have closed the issue you linked, because you have not solved it.  #3 If a specific version of chardet is important to y",
+          "timestamp": "2026-02-23T19:47:24Z"
+        }
+      ]
+    },
+    {
+      "claim_id": "6eda598ef48c",
+      "score": 2.943,
+      "subject": "#7222: Dependency warning",
+      "predicate": "comment_by",
+      "object": "person-roger-zhangg",
+      "evidence": [
+        {
+          "id": "ev-comment-3946514807",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3946514807",
+          "snippet": "Same issue, I need to pin `chardet<6` to keep using request for now",
+          "timestamp": "2026-02-23T18:24:51Z"
+        },
+        {
+          "id": "ev-comment-3951575394",
+          "url": "https://github.com/psf/requests/issues/7222#issuecomment-3951575394",
+          "snippet": "@Houbein please do some more research before you post a rant comment like this  1. You *really should* search closed issues for a problem that still exists in the latest version. 2. This issue was closed, because it is a duplicate of #7219  3. Please read here, why it was added a",
+          "timestamp": "2026-02-24T12:52:31Z"
+        }
+      ]
+    }
+  ]
+}
